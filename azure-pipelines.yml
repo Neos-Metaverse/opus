@@ -15,7 +15,7 @@ strategy:
     #  sourceFile: 'opus.dll'
     #  artifactName : 'windows_x64'
     android:
-      imageName: 'ubuntu-latest'
+      imageName: 'windows-latest'
       cmakeTarget: 'Ninja'
       cmakeArgs: '$(ANDROID_NDK_PATH)/build/cmake/android.toolchain.cmake'
       sourceFolder: ''
@@ -27,14 +27,13 @@ pool:
 
 steps:
 
-- task: Bash@3
+- task: PowerShell@2
   inputs:
     targetType: 'inline'
     script: |
-      echo Test
-      echo "$(ANDROID_NDK_PATH)"
+      echo $(ANDROID_NDK_PATH)
       tree $(ANDROID_NDK_PATH)
-  condition: eq( variables['Agent.OS'], 'Linux' )
+
 - task: VSBuild@1
   inputs:
     solution: 'win32\VS2015\opus.sln'
