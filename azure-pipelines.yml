@@ -5,7 +5,7 @@ strategy:
   matrix:
     linux:
       imageName: 'ubuntu-latest'
-      cmakeTarget: 'Unix Makefiles'
+      cmakeTarget: '"Unix Makefiles"'
     #windows:
     #  imageName: 'windows-latest'
     #  sourceFolder: 'win32\VS2015\x64\ReleaseDLL\'
@@ -28,7 +28,7 @@ steps:
 
 - task: CMake@1
   inputs:
-    cmakeArgs: 'CMakeLists.txt -G "$(cmakeTarget)" -DOPUS_BUILD_SHARED_LIBRARY=ON'
+    cmakeArgs: 'CMakeLists.txt -G $(cmakeTarget) -DOPUS_BUILD_SHARED_LIBRARY=ON'
   condition: eq( variables['Agent.OS'], 'Linux' )
 
 - task: Bash@3
