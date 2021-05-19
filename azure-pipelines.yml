@@ -6,6 +6,7 @@ strategy:
     linux:
       imageName: 'ubuntu-latest'
       cmakeTarget: 'Unix Makefiles'
+      cmakeArgs: ''
       sourceFolder: ''
       sourceFile: 'libopus.so'
       artifactName : 'linux_x64'
