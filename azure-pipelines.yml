@@ -27,8 +27,6 @@ steps:
     configuration: 'ReleaseDLL'
     maximumCpuCount: true
     msbuildArchitecture: 'x64'
-    maximumCpuCount: true
-    msbuildArchitecture: 'x64'
   condition: eq( variables['Agent.OS'], 'Windows_NT' )
 
 - task: CopyFiles@2
