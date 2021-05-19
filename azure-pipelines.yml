@@ -21,6 +21,7 @@ strategy:
       sourceFolder: ''
       sourceFile: 'libopus.so'
       artifactName : 'android_ARMv7'
+      buildCMAKE : true
 
 pool:
   vmImage: $(imageName)
@@ -42,13 +43,13 @@ steps:
     configuration: 'ReleaseDLL'
     maximumCpuCount: true
     msbuildArchitecture: 'x64'
-  condition: eq( variables['Agent.OS'], 'Windows_NT' )
+  condition: $(buildVS)
 
 - task: CMake@1
   inputs:
     workingDirectory: 
     cmakeArgs: ' CMakeLists.txt -DOPUS_BUILD_SHARED_LIBRARY=ON $(cmakeArgs) -G "$(cmakeTarget)"'
-  condition: eq( variables['Agent.OS'], 'Linux' )
+  condition: $(buildCMAKE)
 
 - task: Bash@3
   inputs:
