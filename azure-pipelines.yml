@@ -30,7 +30,7 @@ steps:
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
-    script: 'cmake --help'
+    script: 'choco install ninja'
 
 - task: VSBuild@1
   inputs:
