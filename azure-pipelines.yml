@@ -18,9 +18,8 @@ steps:
 - task: VSBuild@1
   inputs:
     solution: 'win32\VS2015\opus.sln'
-    msbuildArgs: 'WindowsTargetPlatformVersion=$(WindowsTargetPlatformVersion)'
     platform: 'x64'
-    configuration: 'ReleaseDLL'
+    configuration: 'ReleaseDLL;WindowsTargetPlatformVersion=$(WindowsTargetPlatformVersion)'
     maximumCpuCount: true
     msbuildArchitecture: 'x64'
   condition: eq( variables['Agent.OS'], 'Windows_NT' )
