@@ -29,6 +29,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
+      ./autogen.sh
       ./configure
       make
       tree
