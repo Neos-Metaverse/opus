@@ -6,6 +6,9 @@ strategy:
     linux:
       imageName: 'ubuntu-latest'
       cmakeTarget: 'Unix Makefiles'
+      sourceFolder: ''
+      sourceFile: 'libopus.so'
+      artifactName : 'linux_x64'
     #windows:
     #  imageName: 'windows-latest'
     #  sourceFolder: 'win32\VS2015\x64\ReleaseDLL\'
