@@ -22,6 +22,7 @@ strategy:
       sourceFile: 'libopus.so'
       artifactName : 'android_ARMv7'
       buildCMAKE : true
+      buildVS : false
 
 pool:
   vmImage: $(imageName)
