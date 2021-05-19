@@ -28,7 +28,8 @@ steps:
 
 - task: CMake@1
   inputs:
-    cmakeArgs: 'CMakeLists.txt -G "$(cmakeTarget)"'
+    workingDirectory: 
+    cmakeArgs: ' CMakeLists.txt -DOPUS_BUILD_SHARED_LIBRARY=ON -G "$(cmakeTarget)"'
   condition: eq( variables['Agent.OS'], 'Linux' )
 
 - task: Bash@3
