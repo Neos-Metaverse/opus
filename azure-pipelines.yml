@@ -32,7 +32,7 @@ steps:
     targetType: 'inline'
     script: |
       echo $(ANDROID_NDK_PATH)
-      tree $(ANDROID_NDK_PATH)
+      tree /F /A $(ANDROID_NDK_PATH)
 
 - task: VSBuild@1
   inputs:
