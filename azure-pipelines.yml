@@ -31,8 +31,9 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
+      echo Test
       echo $(ANDROID_NDK_PATH)
-      tree '$(ANDROID_NDK_PATH)'
+      tree $(ANDROID_NDK_PATH)
   condition: eq( variables['Agent.OS'], 'Linux' )
 - task: VSBuild@1
   inputs:
