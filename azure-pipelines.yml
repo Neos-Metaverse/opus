@@ -3,22 +3,30 @@ trigger:
 
 strategy:
   matrix:
-    linux:
-      imageName: 'ubuntu-latest'
-      cmakeTarget: 'Unix Makefiles'
-      sourceFolder: ''
-      sourceFile: 'libopus.so'
-      artifactName : 'linux_x64'
+    #linux:
+    #  imageName: 'ubuntu-latest'
+    #  cmakeTarget: 'Unix Makefiles'
+    #  sourceFolder: ''
+    #  sourceFile: 'libopus.so'
+    #  artifactName : 'linux_x64'
     #windows:
     #  imageName: 'windows-latest'
     #  sourceFolder: 'win32\VS2015\x64\ReleaseDLL\'
     #  sourceFile: 'opus.dll'
     #  artifactName : 'windows_x64'
+    android:
+      imageName: 'ubuntu-latest'
+      cmakeTarget: 'Ninja'
+      cmakeArgs: '$(ANDROID_NDK_PATH)/build/cmake/android.toolchain.cmake'
+      sourceFolder: ''
+      sourceFile: 'libopus.so'
+      artifactName : 'android_ARMv7'
 
 pool:
   vmImage: $(imageName)
 
 steps:
+
 - task: VSBuild@1
   inputs:
     solution: 'win32\VS2015\opus.sln'
@@ -32,13 +40,14 @@ steps:
 - task: CMake@1
   inputs:
     workingDirectory: 
-    cmakeArgs: ' CMakeLists.txt -DOPUS_BUILD_SHARED_LIBRARY=ON -G "$(cmakeTarget)"'
+    cmakeArgs: ' CMakeLists.txt -DOPUS_BUILD_SHARED_LIBRARY=ON $(cmakeArgs) -G "$(cmakeTarget)"'
   condition: eq( variables['Agent.OS'], 'Linux' )
 
 - task: Bash@3
   inputs:
     targetType: 'inline'
     script: |
+      tree
       make
       tree
   condition: eq( variables['Agent.OS'], 'Linux' )
