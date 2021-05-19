@@ -17,7 +17,7 @@ strategy:
     android:
       imageName: 'windows-latest'
       cmakeTarget: 'Ninja'
-      cmakeArgs: '-DCMAKE_TOOLCHAIN_FILE=$(ANDROID_NDK_PATH)/build/cmake/android.toolchain.cmake'
+      cmakeArgs: '-DANDROID_ABI=arm7 -DANDROID_NDK=$(ANDROID_NDK_PATH) -DCMAKE_TOOLCHAIN_FILE=$(ANDROID_NDK_PATH)/build/cmake/android.toolchain.cmake'
       sourceFolder: ''
       sourceFile: 'libopus.so'
       artifactName : 'android_ARMv7'
@@ -27,13 +27,10 @@ pool:
   vmImage: $(imageName)
 
 steps:
-
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
-    script: |
-      echo $(ANDROID_NDK_PATH)
-      tree /F /A $(ANDROID_NDK_PATH)
+    script: 'cmake --help'
 
 - task: VSBuild@1
   inputs:
