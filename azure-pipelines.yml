@@ -20,7 +20,7 @@ steps:
     solution: 'win32\VS2015\opus.sln'
     msbuildArgs: '/p:WindowsTargetPlatformVersion=10.0'
     platform: 'x64'
-    configuration: 'ReleaseDLL;'
+    configuration: 'ReleaseDLL'
     maximumCpuCount: true
     msbuildArchitecture: 'x64'
   condition: eq( variables['Agent.OS'], 'Windows_NT' )
