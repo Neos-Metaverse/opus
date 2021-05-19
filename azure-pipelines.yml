@@ -55,7 +55,7 @@ steps:
       tree
       make
       tree
-  condition: eq( variables['Agent.OS'], 'CMAKE' )
+  condition: eq( variables['buildSystem'], 'CMAKE' )
 
 - task: CopyFiles@2
   inputs:
@@ -67,5 +67,5 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'windows_x64'
+    ArtifactName: '$(artifactName)'
     publishLocation: 'Container'
