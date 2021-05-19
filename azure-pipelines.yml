@@ -48,14 +48,10 @@ steps:
     cmakeArgs: ' CMakeLists.txt -DOPUS_BUILD_SHARED_LIBRARY=ON $(cmakeArgs) -G "$(cmakeTarget)"'
   condition: eq( variables['buildSystem'], 'CMAKE' )
 
-- task: Bash@3
+- task: PowerShell@2
   inputs:
     targetType: 'inline'
-    script: |
-      tree
-      make
-      tree
-  condition: eq( variables['buildSystem'], 'CMAKE' )
+    script: 'tree /A /F'
 
 - task: CopyFiles@2
   inputs:
