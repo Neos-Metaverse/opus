@@ -1,0 +1,38 @@
+trigger:
+- neos-release
+
+strategy:
+  matrix:
+    #linux:
+    #  imageName: 'ubuntu-latest'
+    windows:
+      imageName: 'windows-latest'
+      sourceFolder: 'win32\VS2015\x64\ReleaseDLL\'
+      sourceFile: 'opus.dll'
+      artifactName : 'windows_x64'
+
+pool:
+  vmImage: $(imageName)
+
+steps:
+- task: VSBuild@1
+  inputs:
+    solution: 'win32\VS2015\opus.sln'
+    platform: 'x64'
+    configuration: 'ReleaseDLL'
+    maximumCpuCount: true
+    msbuildArchitecture: 'x64'
+  condition: eq( variables['Agent.OS'], 'Windows_NT' )
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(sourceFolder)'
+    Contents: '$(sourceFile)'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    CleanTargetFolder: true
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'windows_x64'
+    publishLocation: 'Container'
