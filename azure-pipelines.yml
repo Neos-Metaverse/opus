@@ -18,11 +18,6 @@ steps:
 - task: VSBuild@1
   inputs:
     solution: 'win32\VS2015\opus.sln'
-    platform: 'x64'
-    configuration: 'ReleaseDLL;WindowsTargetPlatformVersion=latest'
-- task: VSBuild@1
-  inputs:
-    solution: 'win32\VS2015\opus.sln'
     platform: 'x64;WindowsTargetPlatformVersion=latest'
     configuration: 'ReleaseDLL'
     maximumCpuCount: true
